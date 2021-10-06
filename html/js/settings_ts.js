@@ -305,6 +305,17 @@ var SettingsCategory = /** @class */ (function () {
                 setting.appendChild(tdLeft);
                 setting.appendChild(tdRight);
                 break;
+            case "baseurl":
+                var tdLeft = document.createElement("TD");
+                tdLeft.innerHTML = "{{.settings.baseurl.title}}" + ":";
+                var tdRight = document.createElement("TD");
+                var input = content.createInput("text", "baseurl", data);
+                input.setAttribute("placeholder", "{{.settings.baseurl.placeholder}}");
+                input.setAttribute("onchange", "javascript: this.className = 'changed'");
+                tdRight.appendChild(input);
+                setting.appendChild(tdLeft);
+                setting.appendChild(tdRight);
+                break;
             case "udpxy":
                 var tdLeft = document.createElement("TD");
                 tdLeft.innerHTML = "{{.settings.udpxy.title}}" + ":";
@@ -396,6 +407,9 @@ var SettingsCategory = /** @class */ (function () {
                 break;
             case "xepg.replace.missing.images":
                 text = "{{.settings.replaceEmptyImages.description}}";
+                break;
+            case "baseurl":
+                text = "{{.settings.baseurl.description}}";
                 break;
             case "udpxy":
                 text = "{{.settings.udpxy.description}}";

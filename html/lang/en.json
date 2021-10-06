@@ -395,6 +395,12 @@
       "info_vlc": "VLC connects to the streaming server"
 
     },
+    "baseurl":
+    {
+      "title": "Base URL",
+      "description": "Override m3u/xepg URLs. Warning: advanced setting!",
+      "placeholder": "host or ip"
+    },
     "udpxy":
     {
       "title": "UDPxy address",

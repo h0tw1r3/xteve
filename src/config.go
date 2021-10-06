@@ -189,11 +189,6 @@ func Init() (err error) {
 	showInfo(fmt.Sprintf("GitHub:https://github.com/%s", System.GitHub.User))
 	showInfo(fmt.Sprintf("Git Branch:%s [%s]", System.Branch, System.GitHub.User))
 
-	// Domainnamen setzten
-	setGlobalDomain(fmt.Sprintf("%s:%s", System.IPAddress, Settings.Port))
-
-	System.URLBase = fmt.Sprintf("%s://%s:%s", System.ServerProtocol.WEB, System.IPAddress, Settings.Port)
-
 	// HTML Dateien erstellen, mit dev == true werden die lokalen HTML Dateien verwendet
 	if System.Dev == true {
 

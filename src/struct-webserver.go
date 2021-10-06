@@ -25,6 +25,7 @@ type RequestStruct struct {
 		AuthenticationXML        *bool     `json:"authentication.xml,omitempty"`
 		BackupKeep               *int      `json:"backup.keep,omitempty"`
 		BackupPath               *string   `json:"backup.path,omitempty"`
+		BaseURL                  *string   `json:"baseurl,omitempty"`
 		Buffer                   *string   `json:"buffer,omitempty"`
 		BufferSize               *int      `json:"buffer.size.kb, omitempty"`
 		BufferTimeout            *float64  `json:"buffer.timeout,omitempty"`

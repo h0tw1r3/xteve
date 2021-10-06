@@ -415,3 +415,12 @@ func getMD5(str string) string {
 
 	return hex.EncodeToString(md5Hasher.Sum(nil))
 }
+
+func checkIPAddress(ip string) (err error) {
+	for _, val := range System.IPAddressesList {
+		if val == ip {
+			return nil
+		}
+	}
+	return fmt.Errorf("%s: %s", ip, getErrMsg(1015))
+}

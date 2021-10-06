@@ -78,6 +78,9 @@ type SystemStruct struct {
 	OS                     string
 	ScanInProgress         int
 	TimeForAutoUpdate      string
+	DVRURL                 string
+	WEBURL                 string
+	XMLURL                 string
 
 	Notification map[string]Notification
 
@@ -266,6 +269,7 @@ type SettingsStruct struct {
 	BufferSize        int      `json:"buffer.size.kb"`
 	BufferTimeout     float64  `json:"buffer.timeout"`
 	CacheImages       bool     `json:"cache.images"`
+	BaseURL           string   `json:"baseurl"`
 	EpgSource         string   `json:"epgSource"`
 	FFmpegOptions     string   `json:"ffmpeg.options"`
 	FFmpegPath        string   `json:"ffmpeg.path"`

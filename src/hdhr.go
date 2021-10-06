@@ -42,7 +42,7 @@ func getCapability() (xmlContent []byte, err error) {
 	var buffer bytes.Buffer
 
 	capability.Xmlns = "urn:schemas-upnp-org:device-1-0"
-	capability.URLBase = System.ServerProtocol.WEB + "://" + System.Domain
+	capability.URLBase = System.WEBURL
 
 	capability.SpecVersion.Major = 1
 	capability.SpecVersion.Minor = 0
@@ -71,14 +71,14 @@ func getDiscover() (jsonContent []byte, err error) {
 
 	var discover Discover
 
-	discover.BaseURL = System.ServerProtocol.WEB + "://" + System.Domain
+	discover.BaseURL = System.WEBURL
 	discover.DeviceAuth = System.AppName
 	discover.DeviceID = System.DeviceID
 	discover.FirmwareName = "bin_" + System.Version
 	discover.FirmwareVersion = System.Version
 	discover.FriendlyName = System.Name
 
-	discover.LineupURL = fmt.Sprintf("%s://%s/lineup.json", System.ServerProtocol.DVR, System.Domain)
+	discover.LineupURL = fmt.Sprintf("%s/lineup.json", System.DVRURL)
 	discover.Manufacturer = "Golang"
 	discover.ModelNumber = System.Version
 	discover.TunerCount = Settings.Tuner

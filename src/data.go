@@ -33,6 +33,16 @@ func updateServerSettings(request RequestStruct) (settings SettingsStruct, err e
 
 			switch key {
 
+			case "baseurl":
+				var baseurl = value.(string)
+				if len(baseurl) > 0 {
+					err = checkIPAddress(value.(string))
+					if err != nil {
+						showWarning(1015)
+					}
+				}
+				reloadData = true
+
 			case "tuner":
 				showWarning(2105)
 
@@ -188,6 +198,11 @@ func updateServerSettings(request RequestStruct) (settings SettingsStruct, err e
 
 	err = saveSettings(Settings)
 	if err == nil {
+		err = Init()
+		if err != nil {
+			ShowError(err, 0)
+			os.Exit(1)
+		}
 
 		settings = Settings
 
@@ -206,7 +221,7 @@ func updateServerSettings(request RequestStruct) (settings SettingsStruct, err e
 
 			if Settings.EpgSource == "XEPG" && System.ImageCachingInProgress == 0 {
 
-				Data.Cache.Images, err = imgcache.New(System.Folder.ImagesCache, fmt.Sprintf("%s://%s/images/", System.ServerProtocol.WEB, System.Domain), Settings.CacheImages)
+				Data.Cache.Images, err = imgcache.New(System.Folder.ImagesCache, fmt.Sprintf("%s/images/", System.WEBURL), Settings.CacheImages)
 				if err != nil {
 					ShowError(err, 0)
 				}
@@ -510,7 +525,7 @@ func saveXEpgMapping(request RequestStruct) (err error) {
 
 	var tmp = Data.XEPG
 
-	Data.Cache.Images, err = imgcache.New(System.Folder.ImagesCache, fmt.Sprintf("%s://%s/images/", System.ServerProtocol.WEB, System.Domain), Settings.CacheImages)
+	Data.Cache.Images, err = imgcache.New(System.Folder.ImagesCache, fmt.Sprintf("%s/images/", System.WEBURL), Settings.CacheImages)
 	if err != nil {
 		ShowError(err, 0)
 	}

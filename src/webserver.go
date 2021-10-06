@@ -490,7 +490,7 @@ func WS(w http.ResponseWriter, r *http.Request) {
 			file, errNew := xteveBackup()
 			err = errNew
 			if err == nil {
-				response.OpenLink = fmt.Sprintf("%s://%s/download/%s", System.ServerProtocol.WEB, System.Domain, file)
+				response.OpenLink = fmt.Sprintf("%s/download/%s", System.WEBURL, file)
 			}
 
 		case "xteveRestore":
@@ -922,9 +922,9 @@ func API(w http.ResponseWriter, r *http.Request) {
 		response.StreamsAll = int64(len(Data.Streams.All))
 		response.StreamsXepg = int64(Data.XEPG.XEPGCount)
 		response.EpgSource = Settings.EpgSource
-		response.URLDvr = System.Domain
-		response.URLM3U = System.ServerProtocol.M3U + "://" + System.Domain + "/m3u/xteve.m3u"
-		response.URLXepg = System.ServerProtocol.XML + "://" + System.Domain + "/xmltv/xteve.xml"
+		response.URLDvr = System.DVRURL
+		response.URLM3U = System.WEBURL + "/m3u/xteve.m3u"
+		response.URLXepg = System.XMLURL + "/xmltv/xteve.xml"
 
 	case "update.m3u":
 		err = getProviderData("m3u", "")

@@ -139,6 +139,7 @@ func loadSettings() (settings SettingsStruct, err error) {
 	defaults["version"] = System.DBVersion
 	defaults["xteveAutoUpdate"] = true
 	defaults["temp.path"] = System.Folder.Temp
+	defaults["baseurl"] = ""
 
 	// Default Werte setzen
 	for key, value := range defaults {
@@ -168,6 +169,14 @@ func loadSettings() (settings SettingsStruct, err error) {
 
 	if len(settings.VLCPath) == 0 {
 		settings.VLCPath = searchFileInOS("cvlc")
+	}
+
+	if len(settings.BaseURL) > 0 {
+		System.WEBURL = settings.BaseURL
+		System.XMLURL = settings.BaseURL
+		System.URLBase = settings.BaseURL
+	} else {
+		System.URLBase = fmt.Sprintf("%s://%s:%s", System.ServerProtocol.WEB, System.IPAddress, Settings.Port)
 	}
 
 	settings.Version = System.DBVersion
@@ -222,7 +231,12 @@ func saveSettings(settings SettingsStruct) (err error) {
 // Zugriff über die Domain ermöglichen
 func setGlobalDomain(domain string) {
 
-	System.Domain = domain
+        if (len(Settings.BaseURL) > 0) {
+	    System.WEBURL = Settings.BaseURL
+	    System.DVRURL = Settings.BaseURL
+	    System.XMLURL = Settings.BaseURL
+	} else {
+	    System.WEBURL = System.ServerProtocol.M3U
 
 	switch Settings.AuthenticationPMS {
 	case true:
